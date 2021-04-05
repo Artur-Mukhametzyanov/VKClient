@@ -22,22 +22,43 @@ class FriendsPhotosController: UICollectionViewController {
 
 extension FriendsPhotosController {
 
-        override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return myFriendsPhotos.count
-        }
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return myFriendsPhotos.count
+    }
 
-        override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsPhotoCell", for: indexPath) as! FriendsPhotoCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsPhotoCell", for: indexPath) as! FriendsPhotoCell
             
-            cell.friendsPhotosController = self
-            cell.friendsPhotoCell.image = UIImage(named: myFriendsPhotos[indexPath.row])
+        cell.friendsPhotosController = self
+        cell.friendsPhotoCell.image = UIImage(named: myFriendsPhotos[indexPath.row])
             
-            return cell
-        }
+        return cell
+    }
         
 }
 
 extension FriendsPhotosController {
+    
+//    func urlSessionResponse() {
+//
+//        let configuration = URLSessionConfiguration.default
+//        let session = URLSession(configuration: configuration)
+//        var urlConstructor = URLComponents()
+//        urlConstructor.scheme = "https"
+//        urlConstructor.host = "api.vk.com"
+//        urlConstructor.path = "/method/friends.get"
+//        urlConstructor.queryItems = [
+//            URLQueryItem(name: "access_token", value: Session.sessionInstance.token),
+//            URLQueryItem(name: "v", value: "5.130"),
+//            URLQueryItem(name: "service_token", value: "5edceea05edceea05edceea0535eabc68555edc5edceea03eb884a4c1980f3fc78dfa13")
+//        ]
+//
+//        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
+//            let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
+//            print(json)
+//        }
+//        task.resume()
+//    }
     
     // функция зумирования фотографии при нажатии
     func performZoomInForImageView(startingImageView: UIImageView) {

@@ -21,6 +21,7 @@ class FriendsListTableView: UITableViewController {
         super.viewDidLoad()
         
         creatingDict()
+        urlSessionRequest()
     }
     
     //MARK: - Заполняем таблицу
@@ -113,5 +114,26 @@ extension FriendsListTableView: UISearchBarDelegate {
             isSearching = false
             tableView.reloadData()
         }
+    }
+    
+    func urlSessionRequest() {
+ 
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        var urlConstructor = URLComponents()
+        urlConstructor.scheme = "https"
+        urlConstructor.host = "api.vk.com"
+        urlConstructor.path = "/method/friends.get"
+        urlConstructor.queryItems = [
+            URLQueryItem(name: "access_token", value: Session.sessionInstance.token),
+            URLQueryItem(name: "v", value: "5.130"),
+            URLQueryItem(name: "service_token", value: "5edceea05edceea05edceea0535eabc68555edc5edceea03eb884a4c1980f3fc78dfa13")
+        ]
+        
+        let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
+            let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
+            print(json)
+        }
+        task.resume()
     }
 }

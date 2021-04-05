@@ -27,6 +27,8 @@
 		429C5C372590C504000DF08E /* Shadow Circle view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429C5C362590C504000DF08E /* Shadow Circle view.swift */; };
 		42D2CC3225B815B60087143F /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D2CC3125B815B60087143F /* NewsController.swift */; };
 		42D2CC3525B8189D0087143F /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D2CC3425B8189D0087143F /* NewsCell.swift */; };
+		752398A72614B4F200B41E03 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752398A42614AB4700B41E03 /* WebKit.framework */; };
+		7557380A2616E81C0059B265 /* VKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755738092616E81C0059B265 /* VKLoginViewController.swift */; };
 		75DE02D42611E63D00B1A51E /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DE02D32611E63D00B1A51E /* Session.swift */; };
 		75FABB752608A3BA00ADE873 /* PushControllerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FABB742608A3BA00ADE873 /* PushControllerAnimation.swift */; };
 		75FABB782608BE1A00ADE873 /* PopControllerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FABB772608BE1A00ADE873 /* PopControllerAnimation.swift */; };
@@ -56,6 +58,8 @@
 		429C5C362590C504000DF08E /* Shadow Circle view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shadow Circle view.swift"; sourceTree = "<group>"; };
 		42D2CC3125B815B60087143F /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
 		42D2CC3425B8189D0087143F /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		752398A42614AB4700B41E03 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		755738092616E81C0059B265 /* VKLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
 		75DE02D32611E63D00B1A51E /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		75FABB742608A3BA00ADE873 /* PushControllerAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushControllerAnimation.swift; sourceTree = "<group>"; };
 		75FABB772608BE1A00ADE873 /* PopControllerAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopControllerAnimation.swift; sourceTree = "<group>"; };
@@ -67,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				752398A72614B4F200B41E03 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +92,7 @@
 			children = (
 				4201F9A8254559C500E5E9AB /* VKClient */,
 				4201F9A7254559C500E5E9AB /* Products */,
+				752398A32614AB4700B41E03 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,8 +187,17 @@
 			isa = PBXGroup;
 			children = (
 				4201F9BF2545610E00E5E9AB /* LoginViewController.swift */,
+				755738092616E81C0059B265 /* VKLoginViewController.swift */,
 			);
 			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		752398A32614AB4700B41E03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				752398A42614AB4700B41E03 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +279,7 @@
 				4201F9AA254559C500E5E9AB /* AppDelegate.swift in Sources */,
 				4231AFBC258B5FBC00B009C7 /* Gradient View.swift in Sources */,
 				4223445B25593551006E9ED0 /* Struct.swift in Sources */,
+				7557380A2616E81C0059B265 /* VKLoginViewController.swift in Sources */,
 				4201F9AC254559C500E5E9AB /* SceneDelegate.swift in Sources */,
 				429C5C372590C504000DF08E /* Shadow Circle view.swift in Sources */,
 				4205B3EF255D6E6F00EA5C9B /* FriendsListTableView.swift in Sources */,
@@ -425,6 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LA452SPSQ6;
 				INFOPLIST_FILE = VKClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -444,6 +461,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LA452SPSQ6;
 				INFOPLIST_FILE = VKClient/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

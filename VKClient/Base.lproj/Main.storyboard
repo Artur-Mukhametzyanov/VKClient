@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hH0-wj-FLK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rfn-kI-SsP">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -9,6 +9,41 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="9UE-6S-zy3">
+            <objects>
+                <viewController id="Rfn-kI-SsP" customClass="VKLoginViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="96f-qf-TTL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhe-cb-HeS">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WRq-kk-IK0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WRq-kk-IK0" firstAttribute="trailing" secondItem="Dhe-cb-HeS" secondAttribute="trailing" id="04D-kw-g6H"/>
+                            <constraint firstItem="Dhe-cb-HeS" firstAttribute="top" secondItem="WRq-kk-IK0" secondAttribute="top" id="1Ox-je-aH3"/>
+                            <constraint firstItem="Dhe-cb-HeS" firstAttribute="leading" secondItem="WRq-kk-IK0" secondAttribute="leading" id="5cf-Lm-XCV"/>
+                            <constraint firstItem="WRq-kk-IK0" firstAttribute="bottom" secondItem="Dhe-cb-HeS" secondAttribute="bottom" id="jXZ-7V-XWn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="Dhe-cb-HeS" id="kKO-le-ve7"/>
+                        <segue destination="ftm-gE-HPX" kind="presentation" identifier="fromLoginVKSegue" id="BwJ-iu-SQB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PI4-mr-4kr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1071" y="481"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="Zhm-8T-3fj">
             <objects>
@@ -145,7 +180,7 @@
                                         </state>
                                         <connections>
                                             <action selector="loginButton:" destination="hH0-wj-FLK" eventType="touchUpInside" id="Eaw-cG-wtK"/>
-                                            <segue destination="ftm-gE-HPX" kind="presentation" identifier="loginSegue" id="D0V-ty-JJC"/>
+                                            <segue destination="ftm-gE-HPX" kind="presentation" id="zNk-ef-xb4"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOGIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdK-J7-2Ha">
@@ -191,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Scn-Tc-bCU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1320" y="64"/>
+            <point key="canvasLocation" x="1072" y="-216"/>
         </scene>
         <!--Friends List Table View-->
         <scene sceneID="Vhr-Gz-APn">
@@ -693,6 +728,9 @@
             <point key="canvasLocation" x="2063.768115942029" y="776.78571428571422"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="BwJ-iu-SQB"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="actor" width="184" height="184"/>
         <image name="lock" catalog="system" width="128" height="128"/>
