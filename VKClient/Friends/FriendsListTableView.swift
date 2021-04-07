@@ -73,14 +73,14 @@ class FriendsListTableView: UITableViewController {
     }
     
     // MARK: - Передаем имя друга в список фотографий
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowFriendsPhoto",
-            let friendsPhotoController = segue.destination as? FriendsPhotosController,
-            let indexPath = tableView.indexPathForSelectedRow {
-            let friendsName = myFriends[indexPath.row]
-            friendsPhotoController.friendsName = friendsName
-        }   
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ShowFriendsPhoto",
+//            let friendsPhotoController = segue.destination as? FriendsPhotosController,
+//            let indexPath = tableView.indexPathForSelectedRow {
+//            let friendsName = myFriends[indexPath.row]
+//            friendsPhotoController.friendsName = friendsName
+//        }
+//    }
     
     //MARK: - Создаем массив словарей [Буква: [ИмяДруга]]
     func creatingDict() {
@@ -107,6 +107,7 @@ class FriendsListTableView: UITableViewController {
 extension FriendsListTableView: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print ("asdf")
         searchFriendsArray = myFriends.filter({$0.prefix(searchText.count) == searchText})
         isSearching = true
         tableView.reloadData()

@@ -13,6 +13,9 @@ class MyGroupsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        urlSessionRequest()
+        
     }
     
     @IBAction func addGroup (segue: UIStoryboardSegue) {
@@ -25,7 +28,6 @@ class MyGroupsController: UIViewController {
             }
         }
     }
-    
 }
 
 extension MyGroupsController: UITableViewDataSource, UITableViewDelegate {
@@ -58,11 +60,10 @@ extension MyGroupsController {
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
-        urlConstructor.path = "/method/friends.get"
+        urlConstructor.path = "/method/groups.get"
         urlConstructor.queryItems = [
             URLQueryItem(name: "access_token", value: Session.sessionInstance.token),
             URLQueryItem(name: "v", value: "5.130"),
-            URLQueryItem(name: "service_token", value: "5edceea05edceea05edceea0535eabc68555edc5edceea03eb884a4c1980f3fc78dfa13")
         ]
         
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
