@@ -9,6 +9,8 @@ import UIKit
 
 class GlobalGroupsViewController: UIViewController {
     
+    var globalGroupsArray = [GroupsStruct]()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -21,22 +23,24 @@ class GlobalGroupsViewController: UIViewController {
 extension GlobalGroupsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return globalGroups.count
+        return globalGroupsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GlobalGroupsCell", for: indexPath) as! GlobalGroupsCell
-        let globalGroup = globalGroups[indexPath.row]
-        cell.globalGroupLabel.text = globalGroup
+        cell.globalGroupLabel.text = globalGroupsArray[indexPath.row].groupName
+        cell.globalGroupImage.image = globalGroupsArray[indexPath.row].groupPhoto
         return cell
     }
 }
 
 extension GlobalGroupsViewController: UISearchBarDelegate {
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         if searchBar.text != "" {
+            globalGroupsArray.removeAll()
+            tableView.reloadData()
             urlSessionRequest()
         }
     }
@@ -60,8 +64,25 @@ extension GlobalGroupsViewController {
         
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
             let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-            print(json)
+            
+            let dict = json as! [String: Any]
+            let responseJson = dict["response"] as! [String: Any]
+            let groupsArray = responseJson["items"] as! [Any]
+            for group in groupsArray {
+                let groupItem = group as! [String: Any]
+                let groupName = groupItem["name"] as! String
+                let groupPhotoURL = groupItem["photo_100"] as! String
+                let globalGroupPhoto = UIImage(data: try! Data(contentsOf: URL(string: groupPhotoURL)!))
+                
+                let globalGroup = GroupsStruct(groupName: groupName, groupPhoto: globalGroupPhoto!)
+                self.globalGroupsArray.append(globalGroup)
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
+        
         task.resume()
     }
 }

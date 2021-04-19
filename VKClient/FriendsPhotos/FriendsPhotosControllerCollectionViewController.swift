@@ -9,7 +9,9 @@ import UIKit
 
 class FriendsPhotosController: UICollectionViewController {
     
+    var photosArray = [UIImage]()
     public var friendsName = ""
+    public var friendsID = 0
     var startingFrame: CGRect?
     var blackBackgroundView: UIView?
     
@@ -18,29 +20,27 @@ class FriendsPhotosController: UICollectionViewController {
         title = friendsName
         urlSessionResponse()
     }
-    
 }
 
 extension FriendsPhotosController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myFriendsPhotos.count
+        return photosArray.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsPhotoCell", for: indexPath) as! FriendsPhotoCell
             
         cell.friendsPhotosController = self
-        cell.friendsPhotoCell.image = UIImage(named: myFriendsPhotos[indexPath.row])
+        cell.friendsPhotoCell.image = photosArray[indexPath.row]
             
         return cell
     }
-        
 }
 
 extension FriendsPhotosController {
     
-    // MARK: - Передать айди текущего пользователя
+    // MARK: - Запрос к сети и получение данных
     func urlSessionResponse() {
 
         let configuration = URLSessionConfiguration.default
@@ -52,14 +52,35 @@ extension FriendsPhotosController {
         urlConstructor.queryItems = [
             URLQueryItem(name: "access_token", value: Session.sessionInstance.token),
             URLQueryItem(name: "v", value: "5.130"),
-            URLQueryItem(name: "owner_id", value: "260980259"),
-            URLQueryItem(name: "no_service_albums", value: "1")
+            URLQueryItem(name: "owner_id", value: String(friendsID)),
         ]
 
         let task = session.dataTask(with: urlConstructor.url!) { (data, response, error) in
             let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-            print(json)
+            
+            let dict = json as! [String: Any]
+            let responseJson = dict["response"] as! [String: Any]
+            let friendsAlbumsArray = responseJson["items"] as! [Any]
+            for album in friendsAlbumsArray {
+                let sizesDict = album as! [String: Any]
+                let sizes = sizesDict["sizes"] as! [Any]
+                for picture in sizes {
+                    let sizesItem = picture as! [String: Any]
+                    let height = sizesItem["height"] as! Int
+                    if height >= 300 {
+                        let friendPhotoURL = sizesItem["url"] as! String
+                        
+                        let friendsPhoto = UIImage(data: try! Data(contentsOf: URL(string: friendPhotoURL)!))
+                        self.photosArray.append(friendsPhoto!)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
+ 
         task.resume()
     }
     

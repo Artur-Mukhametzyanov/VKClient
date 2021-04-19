@@ -21,7 +21,6 @@ class FriendsPhotoCell: UICollectionViewCell {
         likeControl.addTarget(self, action: #selector(likeTapped(sender:)), for: .valueChanged)
         
         friendsPhotoCell.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomTap)))
-        
     }
 }
 
@@ -32,11 +31,11 @@ extension FriendsPhotoCell {
             likeCounter.text = "1"
             likeCounter.textColor = .red
             
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.15, animations: {
                 self.likeControl.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             })
             
-            UIView.animate(withDuration: 0.3, delay: 0.3, animations: {
+            UIView.animate(withDuration: 0.15, delay: 0.15, animations: {
                 self.likeControl.transform = CGAffineTransform(scaleX: 1, y: 1)
             })
             
