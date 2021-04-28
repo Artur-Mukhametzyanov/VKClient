@@ -37,9 +37,7 @@ class VKLoginViewController: UIViewController {
         
         let request = URLRequest(url: urlComponents.url!)
         webView.load(request)
-        
     }
-
 }
 
 extension VKLoginViewController: WKNavigationDelegate {

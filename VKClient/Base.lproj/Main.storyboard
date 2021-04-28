@@ -459,10 +459,10 @@
             </objects>
             <point key="canvasLocation" x="3563.7681159420295" y="-335.49107142857139"/>
         </scene>
-        <!--Глобальные группы-->
+        <!--Поиск по группам-->
         <scene sceneID="4h9-MC-YS9">
             <objects>
-                <viewController id="kKb-O7-S9X" customClass="GlobalGroupsViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kKb-O7-S9X" userLabel="Поиск по группам" customClass="GlobalGroupsViewController" customModule="VKClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zRs-hN-fb4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

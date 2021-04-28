@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsController: UIViewController {
 
@@ -39,8 +40,10 @@ extension MyGroupsController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyGroupCell", for: indexPath) as! MyGroupCell
+        
+        let groupPhoto = UIImage(data: try! Data(contentsOf: URL(string: myGroupsArray[indexPath.row].groupPhotoURL)!))
         cell.groupName.text = myGroupsArray[indexPath.row].groupName
-        cell.myGroupImage.image = myGroupsArray[indexPath.row].groupPhoto
+        cell.myGroupImage.image = groupPhoto
         return cell
     }
     
@@ -72,7 +75,6 @@ extension MyGroupsController {
             
             let json = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
 
-            
             let dict = json as! [String: Any]
             let responseJson = dict["response"] as! [String: Any]
             let groupsArray = responseJson["items"] as! [Any]
@@ -80,9 +82,10 @@ extension MyGroupsController {
                 let groupItem = group as! [String: Any]
                 let groupName = groupItem["name"] as! String
                 let groupPhotoURL = groupItem["photo_100"] as! String
-                let myGroupPhoto = UIImage(data: try! Data(contentsOf: URL(string: groupPhotoURL)!))
                 
-                let myGroup = GroupsStruct(groupName: groupName, groupPhoto: myGroupPhoto!)
+                let myGroup = GroupsStruct()
+                myGroup.groupName = groupName
+                myGroup.groupPhotoURL = groupPhotoURL
                 self.myGroupsArray.append(myGroup)
             }
             

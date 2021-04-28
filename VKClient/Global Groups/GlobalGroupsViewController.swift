@@ -28,8 +28,10 @@ extension GlobalGroupsViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GlobalGroupsCell", for: indexPath) as! GlobalGroupsCell
+        
+        let groupPhoto = UIImage(data: try! Data(contentsOf: URL(string: globalGroupsArray[indexPath.row].groupPhotoURL)!))
         cell.globalGroupLabel.text = globalGroupsArray[indexPath.row].groupName
-        cell.globalGroupImage.image = globalGroupsArray[indexPath.row].groupPhoto
+        cell.globalGroupImage.image = groupPhoto
         return cell
     }
 }
@@ -72,9 +74,10 @@ extension GlobalGroupsViewController {
                 let groupItem = group as! [String: Any]
                 let groupName = groupItem["name"] as! String
                 let groupPhotoURL = groupItem["photo_100"] as! String
-                let globalGroupPhoto = UIImage(data: try! Data(contentsOf: URL(string: groupPhotoURL)!))
                 
-                let globalGroup = GroupsStruct(groupName: groupName, groupPhoto: globalGroupPhoto!)
+                let globalGroup = GroupsStruct()
+                globalGroup.groupName = groupName
+                globalGroup.groupPhotoURL = groupPhotoURL
                 self.globalGroupsArray.append(globalGroup)
             }
             

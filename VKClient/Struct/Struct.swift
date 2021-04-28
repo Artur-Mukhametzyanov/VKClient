@@ -6,30 +6,25 @@
 //
 
 import UIKit
+import RealmSwift
 
-class MyFriendsStruct {
+class MyFriendsStruct: Object {
     
-    var friendsName: String
-    var friendsPhoto: UIImage
-    var friendsID: Int
+    @objc dynamic var friendsName = ""
+    @objc dynamic var friendsPhotoURL = ""
+    @objc dynamic var friendsID = 0
     
-    init(friendsName: String, friendsPhoto: UIImage, friendsID: Int) {
-        self.friendsName = friendsName
-        self.friendsPhoto = friendsPhoto
-        self.friendsID = friendsID
-    }
+//    override static func primaryKey() -> String? {
+//        return "friendsID"
+//    }
+
 }
 
-class GroupsStruct: Equatable {
+class GroupsStruct: Object {
     
-    var groupName: String
-    var groupPhoto: UIImage
-    
-    init(groupName: String, groupPhoto: UIImage) {
-        self.groupName = groupName
-        self.groupPhoto = groupPhoto
-    }
-    
+    @objc dynamic var groupName = ""
+    @objc dynamic var groupPhotoURL = ""
+
     static func == (lhs: GroupsStruct, rhs: GroupsStruct) -> Bool {
         return lhs.groupName == rhs.groupName
     }
