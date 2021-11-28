@@ -14,7 +14,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBAction func enterButton(_ sender: Any) {
-        enterButtonPressed()
     }
     
     //MARK: - lifecycle
@@ -42,12 +41,29 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     
-    func enterButtonPressed() {
-        if loginField.text == "" && passwordField.text == "" {
-            print ("Success")
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        guard identifier == "enterSegue" else {return true}
+        
+        let password = ""
+        let login = ""
+        
+        if loginField.text == login,
+           passwordField.text == password {
+            return true
         } else {
-            print ("Failed")
+            showLoginError()
+            return false
         }
+    }
+    
+    func showLoginError() {
+        loginField.text = ""
+        passwordField.text = ""
+        let alert = UIAlertController(title: "Ошибка входа", message: "Неверный логин/пароль", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(action)
+        
+        present(alert, animated: true)
     }
     
     // MARK: - Keyboard
