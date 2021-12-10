@@ -34,8 +34,14 @@ extension FriendsPhotosViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsPhotoCell", for: indexPath) as! FriendsPhotoCell
+        
+//        cell.likeControl.addTarget(self, action: #selector(likePressed(_:)), for: .valueChanged)
+        
         cell.friendsPhotoImage.image = photo
         return cell
     }
+    
+//    @objc func likePressed(_ sender: LikeControl) {
+//        print ("like tap")
+//    }
 }
-

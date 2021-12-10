@@ -12,6 +12,7 @@ class MyGroupCell: UITableViewCell {
     //MARK: - Outlets
     @IBOutlet weak var myGroupImage: UIImageView!
     @IBOutlet weak var myGroupName: UILabel!
+
     
     //MARK: - Lifecycle
     override func layoutSubviews() {
@@ -19,6 +20,7 @@ class MyGroupCell: UITableViewCell {
         
         cellCustomization()
     }
+    
 }
 
 extension MyGroupCell {
@@ -26,6 +28,8 @@ extension MyGroupCell {
     //MARK: - Cell customization
     func cellCustomization() {
         
-        myGroupImage.layer.cornerRadius = myGroupImage.layer.bounds.width/2
+        myGroupImage.layer.cornerRadius = myGroupImage.bounds.width/2
+        
     }
 }
+

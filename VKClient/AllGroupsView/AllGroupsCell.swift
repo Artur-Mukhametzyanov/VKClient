@@ -27,5 +27,7 @@ extension AllGroupsCell {
     func cellCustomization() {
         
         allGroupsImage.layer.cornerRadius = allGroupsImage.layer.bounds.width/2
+        allGroupsImage.layer.shadowRadius = 20
+        allGroupsImage.layer.shadowColor = UIColor.black.cgColor
     }
 }
