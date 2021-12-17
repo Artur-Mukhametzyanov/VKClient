@@ -23,6 +23,7 @@ class FriendsListViewController: UIViewController {
 
     var sortedFriendsArray: [Friend] = []
     var firstLettersArray: [Character] = []
+    var stringArray: [String] = []
     var friendsDict: [String: [Friend]] = [:]
     
     //MARK: - Outlets
@@ -50,6 +51,15 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String(firstLettersArray[section])
+    }
+    
+
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        for element in firstLettersArray {
+            let letter = String(element)
+            stringArray.append(letter)
+        }
+        return stringArray
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -103,11 +113,12 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toPhotos" {
-            let indexPath = tableView.indexPathForSelectedRow
-            let key = firstLettersArray[indexPath!.section]
-            let photo = friendsDict[String(key)]![indexPath!.row].friendsImage
-            let photoVC = segue.destination as! FriendsPhotosViewController
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let key = firstLettersArray[indexPath.section]
+            let photo = friendsDict[String(key)]![indexPath.row].friendsImage
+            guard let photoVC = segue.destination as? FriendsPhotosViewController else { return }
             photoVC.photo = photo
+            
         }
     }
 }
