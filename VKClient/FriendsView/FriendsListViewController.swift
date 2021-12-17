@@ -41,7 +41,6 @@ class FriendsListViewController: UIViewController {
     }
 }
 
-
 extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource {
     
     //MARK: - TableViewDelegate&DataSource
@@ -49,15 +48,26 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
         return firstLettersArray.count
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return String(firstLettersArray[section])
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedFriendsArray.count
+        let friendsKey = String(firstLettersArray[section])
+        guard let friendsValues = friendsDict[friendsKey] else { return 0 }
+        return friendsValues.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as! FriendsCell
-        cell.friendsImage.image = sortedFriendsArray[indexPath.row].friendsImage
-        cell.friendsName.text = sortedFriendsArray[indexPath.row].friendsName
+        
+        let friendsKey = firstLettersArray[indexPath.section]
+        if let friendsValues = friendsDict[String(friendsKey)] {
+            
+            cell.friendsName.text = friendsValues[indexPath.row].friendsName
+            cell.friendsImage.image = friendsValues[indexPath.row].friendsImage
+            
+        }
         return cell
     }
     
