@@ -32,7 +32,7 @@ extension AllGroupsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as! AllGroupsCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AllGroupsCell", for: indexPath) as? AllGroupsCell else { return UITableViewCell() }
         cell.allGroupsImage.image = allGroupsArray[indexPath.row].groupsImage
         cell.allGroupsName.text = allGroupsArray[indexPath.row].groupsName
         return cell

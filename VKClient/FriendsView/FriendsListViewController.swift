@@ -59,7 +59,7 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as! FriendsCell
+        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "FriendsCell", for: indexPath) as? FriendsCell else { return UITableViewCell() }
         
         let friendsKey = firstLettersArray[indexPath.section]
         if let friendsValues = friendsDict[String(friendsKey)] {
@@ -99,14 +99,13 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
        
-
-    
     //MARK: - Pass photo
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "toPhotos" {
             let indexPath = tableView.indexPathForSelectedRow
-            let photo = sortedFriendsArray[indexPath!.row].friendsImage
+            let key = firstLettersArray[indexPath!.section]
+            let photo = friendsDict[String(key)]![indexPath!.row].friendsImage
             let photoVC = segue.destination as! FriendsPhotosViewController
             photoVC.photo = photo
         }
