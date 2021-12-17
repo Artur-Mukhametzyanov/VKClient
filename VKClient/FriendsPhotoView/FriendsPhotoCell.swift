@@ -13,9 +13,8 @@ class FriendsPhotoCell: UICollectionViewCell {
     @IBOutlet weak var likeControl: LikeControl!
     @IBOutlet weak var counter: UILabel!
     
-
-    
     override func awakeFromNib() {
+        
         likeControl.addTarget(self, action: #selector(likePressed(_:)), for: .valueChanged)
     }
 }
