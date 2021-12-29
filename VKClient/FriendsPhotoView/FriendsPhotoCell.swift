@@ -9,27 +9,18 @@ import UIKit
 
 class FriendsPhotoCell: UICollectionViewCell {
     
+    //MARK: - Outlets
     @IBOutlet weak var friendsPhotoImage: UIImageView!
-    @IBOutlet weak var likeControl: LikeControl!
-    @IBOutlet weak var counter: UILabel!
     
+    //MARK: - Lifecycle
     override func awakeFromNib() {
-        
-        likeControl.addTarget(self, action: #selector(likePressed(_:)), for: .valueChanged)
+
     }
 }
 
 extension FriendsPhotoCell {
     
-    @objc func likePressed(_ sender: LikeControl) {
-        
-        if likeControl.likePressed == true {
-            counter.textColor = .red
-            counter.text = "1"
-        } else {
-            counter.textColor = .black
-            counter.text = "0"
-        }
-    }
+    
+    
 }
 

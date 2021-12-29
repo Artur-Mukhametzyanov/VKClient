@@ -32,9 +32,7 @@ extension FriendsPhotosViewController: UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendsPhotoCell", for: indexPath) as? FriendsPhotoCell else { return UICollectionViewCell() }
-        
         cell.friendsPhotoImage.image = photo
         return cell
     }

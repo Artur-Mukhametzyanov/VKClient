@@ -1,5 +1,5 @@
 //
-//  FriendsCell.swift
+//  MyGroupCell.swift
 //  VKClient
 //
 //  Created by Artur Mukhametzyanov on 01.12.2021.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class FriendsCell: UITableViewCell {
-
+class MyGroupCell: UITableViewCell {
+    
     //MARK: - Outlets
-    @IBOutlet weak var friendsImage: UIImageView!
-    @IBOutlet weak var friendsName: UILabel!
+    @IBOutlet weak var myGroupImage: UIImageView!
+    @IBOutlet weak var myGroupName: UILabel!
     
     //MARK: - Lifecycle
     override func awakeFromNib() {
@@ -27,19 +27,18 @@ class FriendsCell: UITableViewCell {
     }
 }
 
-extension FriendsCell {
+extension MyGroupCell {
     
     //MARK: - Cell customization
     func cellCustomization() {
-        
-        friendsImage.layer.cornerRadius = friendsImage.layer.bounds.width/2
+        myGroupImage.layer.cornerRadius = myGroupImage.bounds.width/2
     }
     
     //MARK: - Tap on image
     func addTapGesture() {
-        friendsImage.isUserInteractionEnabled = true
+        myGroupImage.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageAnimation(_:)))
-        friendsImage.addGestureRecognizer(tap)
+        myGroupImage.addGestureRecognizer(tap)
     }
     
     @objc func imageAnimation(_ sender: Any) {
@@ -49,6 +48,7 @@ extension FriendsCell {
         animation.stiffness = 400
         animation.mass = 2
         animation.duration = 2
-        self.friendsImage.layer.add(animation, forKey: nil)
+        self.myGroupImage.layer.add(animation, forKey: nil)
     }
 }
+

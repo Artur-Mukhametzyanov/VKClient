@@ -10,7 +10,7 @@ import UIKit
 class AllGroupsViewController: UIViewController {
     
     //MARK: - Data
-    var allGroupsArray: [Group] = [Group(groupsImage: UIImage(named: "beach")!, groupsName: "Море и песок")]
+    var allGroupsArray: [Group] = [Group(groupsImage: UIImage(named: "beach") ?? UIImage(), groupsName: "Море и песок")]
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -37,8 +37,4 @@ extension AllGroupsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.allGroupsName.text = allGroupsArray[indexPath.row].groupsName
         return cell
     }
-    
-    //MARK: - Adding groups
-    
-    
 }

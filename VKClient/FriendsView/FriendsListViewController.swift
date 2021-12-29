@@ -9,16 +9,11 @@ import UIKit
 
 class FriendsListViewController: UIViewController {
     //MARK: - Data
-    var friendsArray: [Friend] = [Friend(friendsImage: UIImage(named: "jackson")!, friendsName: "Michael Jackson"),
-                                  Friend(friendsImage: UIImage(named: "chuck")!, friendsName: "Chuck Norris"),
-                                  Friend(friendsImage: UIImage(named: "mithun")!, friendsName: "Mithun Chakraborty"),
-                                  Friend(friendsImage: UIImage(named: "sasha")!, friendsName: "Sasha Grey"),
-                                  Friend(friendsImage: UIImage(named: "nikita")!, friendsName: "Никита Джигурда"),
-                                  Friend(friendsImage: UIImage(named: "jackson")!, friendsName: "101 Далматинец"),
-                                  Friend(friendsImage: UIImage(named: "chuck")!, friendsName: "Борис Бритва"),
-                                  Friend(friendsImage: UIImage(named: "mithun")!, friendsName: "Барбарис Бритва"),
-                                  Friend(friendsImage: UIImage(named: "sasha")!, friendsName: "102 Далматинца"),
-                                  Friend(friendsImage: UIImage(named: "nikita")!, friendsName: "Виктор Длинноволосый"),
+    var friendsArray: [Friend] = [Friend(friendsImage: UIImage(named: "jackson") ?? UIImage(), friendsName: "Michael Jackson"),
+                                  Friend(friendsImage: UIImage(named: "chuck") ?? UIImage(), friendsName: "Chuck Norris"),
+                                  Friend(friendsImage: UIImage(named: "mithun") ?? UIImage(), friendsName: "Mithun Chakraborty"),
+                                  Friend(friendsImage: UIImage(named: "sasha") ?? UIImage(), friendsName: "Sasha Grey"),
+                                  Friend(friendsImage: UIImage(named: "nikita") ?? UIImage(), friendsName: "Никита Джигурда"),
     ]
 
     var sortedFriendsArray: [Friend] = []
@@ -90,8 +85,8 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func gettingFirstLetters() {
         for name in sortedFriendsArray {
-            if !firstLettersArray.contains(name.friendsName.first!) {
-                firstLettersArray.append(name.friendsName.first!)
+            if !firstLettersArray.contains((name.friendsName.first!)) {
+                firstLettersArray.append((name.friendsName.first!))
             }
         }
     }

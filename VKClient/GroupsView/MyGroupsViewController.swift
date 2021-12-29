@@ -10,9 +10,9 @@ import UIKit
 class MyGroupsViewController: UIViewController {
     
     //MARK: - Data
-    var myGroupsArray: [Group] = [Group(groupsImage: UIImage(named: "shaurma")!, groupsName: "Клуб любителей шаурмы"),
-                                  Group(groupsImage: UIImage(named: "guitar")!, groupsName: "Дрынькаем на гитаре"),
-                                  Group(groupsImage: UIImage(named: "sector")!, groupsName: "We Are Сектор Газа"),
+    var myGroupsArray: [Group] = [Group(groupsImage: UIImage(named: "shaurma") ?? UIImage(), groupsName: "Клуб любителей шаурмы"),
+                                  Group(groupsImage: UIImage(named: "guitar") ?? UIImage(), groupsName: "Дрынькаем на гитаре"),
+                                  Group(groupsImage: UIImage(named: "sector") ?? UIImage(), groupsName: "We Are Сектор Газа"), 
     ]
     
     var filteredArray: [Group]!
@@ -58,7 +58,7 @@ extension MyGroupsViewController: UITableViewDelegate, UITableViewDataSource, UI
         } else {
             for singleGroup in myGroupsArray {
                 if singleGroup.groupsName.lowercased().contains(searchText.lowercased()) {
-                    filteredArray?.append(singleGroup)
+                    filteredArray.append(singleGroup)
                 }
             }
         }
