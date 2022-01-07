@@ -67,14 +67,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9001EB662757D8B900209AC2 /* Controls */ = {
-			isa = PBXGroup;
-			children = (
-				90310B5C27637CC000601B3C /* LikeControl.swift */,
-			);
-			path = Controls;
-			sourceTree = "<group>";
-		};
 		9001EB692757DC5700209AC2 /* GroupsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,11 +137,11 @@
 			children = (
 				90EB6F18274F98EA00CBCAE4 /* LoginViewController.swift */,
 				905B92D4277CC701003A8B74 /* Session.swift */,
+				90310B5C27637CC000601B3C /* LikeControl.swift */,
 				9001EB692757DC5700209AC2 /* GroupsView */,
 				909C68922757550B00FFA64D /* FriendsView */,
 				901371B6275B546300F0521F /* FriendsPhotoView */,
 				90162AFD2768C0FE000A97E6 /* NewsView */,
-				9001EB662757D8B900209AC2 /* Controls */,
 				90D3C8B6274E54B5005B5755 /* AppDelegate.swift */,
 				90D3C8B8274E54B5005B5755 /* SceneDelegate.swift */,
 				90D3C8BC274E54B5005B5755 /* Main.storyboard */,

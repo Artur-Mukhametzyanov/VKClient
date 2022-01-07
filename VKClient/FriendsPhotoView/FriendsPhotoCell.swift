@@ -20,7 +20,5 @@ class FriendsPhotoCell: UICollectionViewCell {
 
 extension FriendsPhotoCell {
     
-    
-    
 }
 
