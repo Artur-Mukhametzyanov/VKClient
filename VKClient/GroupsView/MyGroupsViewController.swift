@@ -30,6 +30,8 @@ class MyGroupsViewController: UIViewController {
         searchBar.delegate = self
         
         filteredArray = myGroupsArray
+        let myGroupsInteractor = MyGroupsInteractor()
+        myGroupsInteractor.requestMyGroupsList()
     }
 }
 

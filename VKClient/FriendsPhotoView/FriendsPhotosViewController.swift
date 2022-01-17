@@ -14,6 +14,8 @@ class FriendsPhotosViewController: UIViewController {
     var swipeRight: UIViewPropertyAnimator!
     var swipeLeft: UIViewPropertyAnimator!
 
+    let userId = 52036725
+    
     //MARK: - Data
     var photo: UIImage?
     var photoArray: [UIImage] = [UIImage(named: "nikita") ?? UIImage(),
@@ -34,6 +36,9 @@ class FriendsPhotosViewController: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        let photosInteractor = FriendsPhotosInteractor()
+        photosInteractor.requestFriendsPhotos(ownerId: userId)
     }
     
     override func viewWillAppear(_ animated: Bool) {

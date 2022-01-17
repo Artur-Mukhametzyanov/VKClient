@@ -14,6 +14,7 @@ class AllGroupsViewController: UIViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,6 +22,8 @@ class AllGroupsViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
+        
     }
 }
 
@@ -36,5 +39,14 @@ extension AllGroupsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.allGroupsImage.image = allGroupsArray[indexPath.row].groupsImage
         cell.allGroupsName.text = allGroupsArray[indexPath.row].groupsName
         return cell
+    }
+}
+
+extension AllGroupsViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let searchGroupsRequest = AllGroupsInteractor()
+        searchGroupsRequest.requestAllGroupsList(searchRequest: searchBar.text ?? "")
     }
 }

@@ -34,6 +34,9 @@ class FriendsListViewController: UIViewController {
         gettingFirstLetters()
         creatingDict()
         
+        let friendsInteractor = FriendsInteractor()
+        friendsInteractor.requestFriendsList()
+        
     }
 }
 
