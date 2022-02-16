@@ -10,7 +10,7 @@ import Alamofire
 
 class MyGroupsInteractor {
     
-    func requestMyGroupsList() {
+    func requestMyGroupsList(completion: @escaping (GroupsResponse) -> Void) {
         
         guard let token = Session.shared.token else {
             return
@@ -22,8 +22,14 @@ class MyGroupsInteractor {
                                       "v": 5.131
         ]
         
-        AF.request(url, method: .get, parameters: parameters).response { response in
-            print ("Список моих групп получен", response)
+        AF.request(url, method: .get, parameters: parameters).response { rawData in
+            do {
+                guard let data = rawData.data else { return }
+                let response = try JSONDecoder().decode(GroupsResponse.self, from: data)
+                completion(response)
+            } catch {
+                print(error)
+            }
         }
     }
 }

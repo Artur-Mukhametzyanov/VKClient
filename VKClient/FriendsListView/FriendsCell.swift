@@ -11,7 +11,8 @@ class FriendsCell: UITableViewCell {
 
     //MARK: - Outlets
     @IBOutlet weak var friendsImage: UIImageView!
-    @IBOutlet weak var friendsName: UILabel!
+    @IBOutlet weak var firstName: UILabel!
+    @IBOutlet weak var secondName: UILabel!
     
     //MARK: - Lifecycle
     override func awakeFromNib() {

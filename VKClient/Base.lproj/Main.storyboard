@@ -107,7 +107,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="586" y="207"/>
+            <point key="canvasLocation" x="226" y="-654"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="rKT-hN-BXg">
@@ -135,8 +135,14 @@
                                                         <constraint firstAttribute="height" constant="70" id="vuZ-kD-4Rz"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma1-Jt-bNK">
-                                                    <rect key="frame" x="120" y="44.5" width="44.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ma1-Jt-bNK">
+                                                    <rect key="frame" x="120" y="44.5" width="36.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" systemColor="linkColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фамилия" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BoF-ny-Rsl">
+                                                    <rect key="frame" x="164" y="44.5" width="80" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" systemColor="linkColor"/>
                                                     <nil key="highlightedColor"/>
@@ -146,13 +152,17 @@
                                                 <constraint firstItem="Ma1-Jt-bNK" firstAttribute="centerY" secondItem="KNU-Yz-1p9" secondAttribute="centerY" id="2G9-f9-Edh"/>
                                                 <constraint firstItem="keu-Jt-wy4" firstAttribute="leading" secondItem="KNU-Yz-1p9" secondAttribute="leading" constant="20" id="8Gb-gJ-WS8"/>
                                                 <constraint firstItem="keu-Jt-wy4" firstAttribute="centerY" secondItem="KNU-Yz-1p9" secondAttribute="centerY" id="BTE-qj-elD"/>
+                                                <constraint firstItem="BoF-ny-Rsl" firstAttribute="leading" secondItem="Ma1-Jt-bNK" secondAttribute="trailing" constant="7.5" id="YVp-U8-YUJ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ma1-Jt-bNK" secondAttribute="trailing" constant="20" symbolic="YES" id="oXL-vn-Zaa"/>
+                                                <constraint firstItem="BoF-ny-Rsl" firstAttribute="centerY" secondItem="Ma1-Jt-bNK" secondAttribute="centerY" id="qfY-hM-Bkr"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BoF-ny-Rsl" secondAttribute="trailing" constant="20" symbolic="YES" id="vlW-2d-myp"/>
                                                 <constraint firstItem="Ma1-Jt-bNK" firstAttribute="leading" secondItem="keu-Jt-wy4" secondAttribute="trailing" constant="30" id="xnJ-Zz-Hh9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="firstName" destination="Ma1-Jt-bNK" id="weW-wU-OBh"/>
                                             <outlet property="friendsImage" destination="keu-Jt-wy4" id="Hp8-1x-feR"/>
-                                            <outlet property="friendsName" destination="Ma1-Jt-bNK" id="4CP-sO-PuL"/>
+                                            <outlet property="secondName" destination="BoF-ny-Rsl" id="Rba-g5-4hh"/>
                                             <segue destination="ThI-vH-QrG" kind="show" identifier="toPhotos" id="mz8-E0-STi"/>
                                         </connections>
                                     </tableViewCell>
@@ -360,7 +370,7 @@
                     <navigationItem key="navigationItem" title="Мои группы" id="Q1J-DQ-lbR">
                         <barButtonItem key="rightBarButtonItem" title="Все группы" id="qhQ-jF-e0e">
                             <connections>
-                                <segue destination="fix-Qc-CSX" kind="show" id="fFs-2j-75q"/>
+                                <segue destination="fix-Qc-CSX" kind="show" identifier="addGroup" id="fFs-2j-75q"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -422,7 +432,7 @@
                                         <connections>
                                             <outlet property="allGroupsImage" destination="QhW-OB-BIi" id="wvT-VL-CbV"/>
                                             <outlet property="allGroupsName" destination="0CI-xw-fBb" id="Uxs-gh-Mb3"/>
-                                            <segue destination="WD7-mW-bFb" kind="unwind" identifier="addCity" unwindAction="addCityWithSegue:" id="RMh-sl-3OR"/>
+                                            <segue destination="WD7-mW-bFb" kind="unwind" identifier="addGroup" unwindAction="addGroupWithSegue:" id="RMh-sl-3OR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -481,7 +491,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FME-e6-iug" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="586" y="-654"/>
+            <point key="canvasLocation" x="226" y="56"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1ty-Hm-JcA">
@@ -704,7 +714,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="r0f-ro-wEz"/>
+        <segue reference="ioe-GG-WHr"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrowshape.turn.up.left" catalog="system" width="128" height="106"/>

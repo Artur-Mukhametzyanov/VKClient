@@ -9,17 +9,18 @@ import UIKit
 
 class FriendsListViewController: UIViewController {
     //MARK: - Data
-    var friendsArray: [Friend] = [Friend(friendsImage: UIImage(named: "jackson") ?? UIImage(), friendsName: "Michael Jackson"),
-                                  Friend(friendsImage: UIImage(named: "chuck") ?? UIImage(), friendsName: "Chuck Norris"),
-                                  Friend(friendsImage: UIImage(named: "mithun") ?? UIImage(), friendsName: "Mithun Chakraborty"),
-                                  Friend(friendsImage: UIImage(named: "sasha") ?? UIImage(), friendsName: "Sasha Grey"),
-                                  Friend(friendsImage: UIImage(named: "nikita") ?? UIImage(), friendsName: "Никита Джигурда"),
-    ]
-
-    var sortedFriendsArray: [Friend] = []
+//    var friendsArray: [Friend] = [Friend(friendsImage: UIImage(named: "jackson") ?? UIImage(), friendsName: "Michael Jackson"),
+//                                  Friend(friendsImage: UIImage(named: "chuck") ?? UIImage(), friendsName: "Chuck Norris"),
+//                                  Friend(friendsImage: UIImage(named: "mithun") ?? UIImage(), friendsName: "Mithun Chakraborty"),
+//                                  Friend(friendsImage: UIImage(named: "sasha") ?? UIImage(), friendsName: "Sasha Grey"),
+//                                  Friend(friendsImage: UIImage(named: "nikita") ?? UIImage(), friendsName: "Никита Джигурда"),
+//    ]
+    var friendsArray: [FriendItem] = []
+    
+    var sortedFriendsArray: [FriendItem] = []
     var firstLettersArray: [Character] = []
     var stringArray: [String] = []
-    var friendsDict: [String: [Friend]] = [:]
+    var friendsDict: [String: [FriendItem]] = [:]
     
     //MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -28,15 +29,9 @@ class FriendsListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getData()
         tableView.delegate = self
         tableView.dataSource = self
-        arraySorting()
-        gettingFirstLetters()
-        creatingDict()
-        
-        let friendsInteractor = FriendsInteractor()
-        friendsInteractor.requestFriendsList()
-        
     }
 }
 
@@ -51,7 +46,6 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
         return String(firstLettersArray[section])
     }
     
-
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         for element in firstLettersArray {
             let letter = String(element)
@@ -72,8 +66,11 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
         let friendsKey = firstLettersArray[indexPath.section]
         if let friendsValues = friendsDict[String(friendsKey)] {
             
-            cell.friendsName.text = friendsValues[indexPath.row].friendsName
-            cell.friendsImage.image = friendsValues[indexPath.row].friendsImage
+            let picture = UIImage(data: try! Data(contentsOf: URL(string: friendsValues[indexPath.row].friendsImageLink)!))
+            
+            cell.friendsImage.image = picture
+            cell.firstName.text = friendsValues[indexPath.row].firstName
+            cell.secondName.text = friendsValues[indexPath.row].lastName
             
         }
         return cell
@@ -82,22 +79,22 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
     //MARK: - Separating by sections
     func arraySorting() {
         sortedFriendsArray = friendsArray.sorted {
-            $0.friendsName < $1.friendsName
+            $0.firstName < $1.firstName
         }
     }
 
     func gettingFirstLetters() {
         for name in sortedFriendsArray {
-            if !firstLettersArray.contains((name.friendsName.first!)) {
-                firstLettersArray.append((name.friendsName.first!))
+            if !firstLettersArray.contains((name.firstName.first!)) {
+                firstLettersArray.append((name.firstName.first!))
             }
         }
     }
 
     func creatingDict() {
         for friend in sortedFriendsArray {
-            let firstLetterIndex = friend.friendsName.index(friend.friendsName.startIndex, offsetBy: 1)
-            let friendsKey = String(friend.friendsName[..<firstLetterIndex])
+            let firstLetterIndex = friend.firstName.index(friend.firstName.startIndex, offsetBy: 1)
+            let friendsKey = String(friend.firstName[..<firstLetterIndex])
             if var friendsValues = friendsDict[friendsKey] {
                 friendsValues.append(friend)
                 friendsDict[friendsKey] = friendsValues
@@ -107,16 +104,26 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
        
-    //MARK: - Pass photo
+    //MARK: - Pass ID
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         if segue.identifier == "toPhotos" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             let key = firstLettersArray[indexPath.section]
-            let photo = friendsDict[String(key)]![indexPath.row].friendsImage
+            let id = friendsDict[String(key)]![indexPath.row].userId
             guard let photoVC = segue.destination as? FriendsPhotosViewController else { return }
-            photoVC.photo = photo
-            
+            photoVC.userId = id         
+        }
+    }
+    
+    func getData() {
+        let friendsInteractor = FriendsInteractor()
+        friendsInteractor.requestFriendsList { [weak self] response in
+            self!.friendsArray = response.response.items
+            self!.arraySorting()
+            self!.gettingFirstLetters()
+            self!.creatingDict()
+            self!.tableView.reloadData()
         }
     }
 }

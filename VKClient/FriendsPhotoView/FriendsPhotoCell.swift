@@ -11,14 +11,4 @@ class FriendsPhotoCell: UICollectionViewCell {
     
     //MARK: - Outlets
     @IBOutlet weak var friendsPhotoImage: UIImageView!
-    
-    //MARK: - Lifecycle
-    override func awakeFromNib() {
-
-    }
 }
-
-extension FriendsPhotoCell {
-    
-}
-

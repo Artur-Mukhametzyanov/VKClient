@@ -10,7 +10,7 @@ import Alamofire
 
 class FriendsInteractor {
     
-    func requestFriendsList() {
+    func requestFriendsList(completion: @escaping (FriendResponse) -> Void) {
         
         guard let token = Session.shared.token else {
             return
@@ -22,8 +22,14 @@ class FriendsInteractor {
                                       "v": 5.131
         ]
         
-        AF.request(url, method: .get, parameters: parameters).response { response in
-            print ("Список друзей получен", response)
+        AF.request(url, method: .get, parameters: parameters).responseJSON { rawData in
+            do {
+                guard let data = rawData.data else {return}
+                let response = try JSONDecoder().decode(FriendResponse.self, from: data)
+                completion(response)
+            } catch {
+                print(error)
+            }
         }
     }
 }

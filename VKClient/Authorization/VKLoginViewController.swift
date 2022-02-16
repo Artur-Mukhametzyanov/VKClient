@@ -55,7 +55,6 @@ extension VKLoginViewController: WKNavigationDelegate {
             session.token = token
             session.userId = Int(userId)
             print (token)
-            print (userId)
             decisionHandler(.cancel)
             performSegue(withIdentifier: "vkSegue", sender: self)
         }
