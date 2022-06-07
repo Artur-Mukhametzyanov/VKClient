@@ -5,14 +5,8 @@
 //  Created by Artur Mukhametzyanov on 01.12.2021.
 //
 
-import UIKit
-
-//struct Friend {
-//    let userId: Int
-//    let firstName: String
-//    let lastName: String
-//    let friendsImage: UIImage
-//}
+import Foundation
+import RealmSwift
 
 struct FriendResponse: Codable {
     let response: Response
@@ -22,11 +16,12 @@ struct Response: Codable {
     let items: [FriendItem]
 }
 
-struct FriendItem: Codable {
-    let userId: Int
-    let firstName: String
-    let lastName: String
-    let friendsImageLink: String
+class FriendItem: Object, Codable {
+    
+    @objc dynamic var userId: Int
+    @objc dynamic var firstName: String
+    @objc dynamic var lastName: String
+    @objc dynamic var friendsImageLink: String
     
     enum CodingKeys: String, CodingKey {
         case userId = "id"

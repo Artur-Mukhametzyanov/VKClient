@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct PhotoResponse: Codable {
     var response: FriendsPhotoResponse
@@ -19,9 +20,10 @@ struct PhotoItems: Codable {
     var sizes: [PhotoInfo]
 }
 
-struct PhotoInfo: Codable {
-    var type: String
-    var photoUrl: String
+class PhotoInfo: Object, Codable {
+    
+    @objc dynamic var type: String
+    @objc dynamic var photoUrl: String
     
     enum CodingKeys: String, CodingKey {
         case type
