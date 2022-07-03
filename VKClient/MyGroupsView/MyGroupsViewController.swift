@@ -6,14 +6,9 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyGroupsViewController: UIViewController {
-    
-    //MARK: - Data
-    //    var myGroupsArray: [Group] = [Group(groupsImage: UIImage(named: "shaurma") ?? UIImage(), groupsName: "Клуб любителей шаурмы"),
-    //                                  Group(groupsImage: UIImage(named: "guitar") ?? UIImage(), groupsName: "Дрынькаем на гитаре"),
-    //                                  Group(groupsImage: UIImage(named: "sector") ?? UIImage(), groupsName: "We Are Сектор Газа"),
-    //    ]
     
     var myGroupsArray: [GroupsItems] = []
     var filteredArray: [GroupsItems] = []
@@ -35,7 +30,7 @@ class MyGroupsViewController: UIViewController {
 
 extension MyGroupsViewController: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
-    //MARK: - Table view delegate and DataSource
+    //MARK: - Table view Delegate, DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredArray.count
     }
@@ -52,10 +47,10 @@ extension MyGroupsViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     //MARK: - Search bar delegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
         filteredArray = []
         
-        if searchText == "" {
+        if searchText.isEmpty {
             filteredArray = myGroupsArray
         } else {
             for singleGroup in myGroupsArray {
@@ -77,17 +72,7 @@ extension MyGroupsViewController: UITableViewDelegate, UITableViewDataSource, UI
         }
     }
     
-    //MARK: - Getting data
-    func getData() {
-        let myGroupsInteractor = MyGroupsInteractor()
-        myGroupsInteractor.requestMyGroupsList { [weak self] response in
-            self!.myGroupsArray = response.response.items
-            self!.filteredArray = self!.myGroupsArray
-            self!.tableView.reloadData()
-        }
-    }
-    
-    // MARK: - Adding groups
+    //MARK: - Adding groups
     @IBAction func addGroup(segue: UIStoryboardSegue) {
 
         if segue.identifier == "addGroup" {
@@ -102,6 +87,27 @@ extension MyGroupsViewController: UITableViewDelegate, UITableViewDataSource, UI
             self.filteredArray.append(newGroup)
             self.myGroupsArray.append(newGroup)
             tableView.reloadData()
+        }
+    }
+    
+    //MARK: - Getting data from network
+    func getData() {
+        let myGroupsInteractor = MyGroupsInteractor()
+        myGroupsInteractor.requestMyGroupsList { [weak self] in
+            self?.loadDataFromRealm()
+            self?.tableView.reloadData()
+        }
+    }
+    
+    //MARK: - Getting data from realm
+    func loadDataFromRealm() {
+        do {
+            let realm = try Realm()
+            let groups = realm.objects(GroupsItems.self)
+            self.myGroupsArray = Array (groups)
+            self.filteredArray = self.myGroupsArray
+        } catch {
+            print (error)
         }
     }
 }

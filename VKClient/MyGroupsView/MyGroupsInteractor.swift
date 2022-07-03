@@ -7,10 +7,11 @@
 
 import Foundation
 import Alamofire
+import RealmSwift
 
 class MyGroupsInteractor {
     
-    func requestMyGroupsList(completion: @escaping (GroupsResponse) -> Void) {
+    func requestMyGroupsList(completion: @escaping() -> Void) {
         
         guard let token = Session.shared.token else {
             return
@@ -26,10 +27,26 @@ class MyGroupsInteractor {
             do {
                 guard let data = rawData.data else { return }
                 let response = try JSONDecoder().decode(GroupsResponse.self, from: data)
-                completion(response)
+                let responseForRealm = response.response.items
+                self.saveToRealm(data: responseForRealm)
+
             } catch {
                 print(error)
             }
+            completion()
+        }
+    }
+    
+    func saveToRealm(data: [GroupsItems]) {
+        do {
+            let realm = try Realm()
+            let oldGroups = realm.objects(GroupsItems.self)
+            realm.beginWrite()
+            realm.delete(oldGroups)
+            realm.add(data)
+            try realm.commitWrite()
+        } catch {
+            print (error)
         }
     }
 }

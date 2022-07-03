@@ -6,15 +6,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsListViewController: UIViewController {
-    //MARK: - Data
-//    var friendsArray: [Friend] = [Friend(friendsImage: UIImage(named: "jackson") ?? UIImage(), friendsName: "Michael Jackson"),
-//                                  Friend(friendsImage: UIImage(named: "chuck") ?? UIImage(), friendsName: "Chuck Norris"),
-//                                  Friend(friendsImage: UIImage(named: "mithun") ?? UIImage(), friendsName: "Mithun Chakraborty"),
-//                                  Friend(friendsImage: UIImage(named: "sasha") ?? UIImage(), friendsName: "Sasha Grey"),
-//                                  Friend(friendsImage: UIImage(named: "nikita") ?? UIImage(), friendsName: "Никита Джигурда"),
-//    ]
+
     var friendsArray: [FriendItem] = []
     
     var sortedFriendsArray: [FriendItem] = []
@@ -116,14 +111,26 @@ extension FriendsListViewController: UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    //MARK: - Getting data from network
     func getData() {
         let friendsInteractor = FriendsInteractor()
-        friendsInteractor.requestFriendsList { [weak self] response in
-            self!.friendsArray = response.response.items
-            self!.arraySorting()
-            self!.gettingFirstLetters()
-            self!.creatingDict()
-            self!.tableView.reloadData()
+        friendsInteractor.requestFriendsList { [weak self] in
+            self?.loadDataFromRealm()
+            self?.tableView.reloadData()
+        }
+    }
+    
+    //MARK: - Getting data from realm and preparing for sorting
+    func loadDataFromRealm() {
+        do {
+            let realm = try Realm()
+            let friends = realm.objects(FriendItem.self)
+            self.friendsArray = Array(friends)
+            self.arraySorting()
+            self.gettingFirstLetters()
+            self.creatingDict()
+        } catch {
+            print (error)
         }
     }
 }

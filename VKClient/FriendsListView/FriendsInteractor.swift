@@ -7,10 +7,11 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class FriendsInteractor {
     
-    func requestFriendsList(completion: @escaping (FriendResponse) -> Void) {
+    func requestFriendsList(completion: @escaping () -> Void) {
         
         guard let token = Session.shared.token else {
             return
@@ -26,10 +27,28 @@ class FriendsInteractor {
             do {
                 guard let data = rawData.data else {return}
                 let response = try JSONDecoder().decode(FriendResponse.self, from: data)
-                completion(response)
+                
+                let responseForRealm = response.response.items
+                self.saveToRealm(data: responseForRealm)
+
             } catch {
                 print(error)
             }
+            completion()
         }
     }
+    
+    func saveToRealm(data: [FriendItem]) {
+    do {
+        let realm = try Realm()
+        let oldFriends = realm.objects(FriendItem.self)
+        realm.beginWrite()
+        realm.delete(oldFriends)
+        realm.add(data)
+        try realm.commitWrite()
+    } catch {
+        print (error)
+    }
+    }
 }
+
