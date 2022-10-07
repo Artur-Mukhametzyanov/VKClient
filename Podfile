@@ -8,5 +8,7 @@ target 'VKClient' do
   # Pods for VKClient
 	pod 'Alamofire'
 	pod 'RealmSwift'
+	pod 'Firebase/Core'
+	pod 'Firebase/Auth'
 
 end

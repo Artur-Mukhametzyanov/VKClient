@@ -21,6 +21,7 @@
 		903268F927949702005EE049 /* AllGroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903268F827949702005EE049 /* AllGroupsViewController.swift */; };
 		903268FB2794A65F005EE049 /* FriendsPhotosInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903268FA2794A65F005EE049 /* FriendsPhotosInteractor.swift */; };
 		90376ED627AEDE5800C64671 /* PhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90376ED527AEDE5800C64671 /* PhotoItem.swift */; };
+		9046B98728C7A7FE007F17D5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9046B98628C7A7FE007F17D5 /* GoogleService-Info.plist */; };
 		9059BBC12794255100451731 /* VKLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059BBC02794255100451731 /* VKLoginViewController.swift */; };
 		9059BBC327945B2900451731 /* FriendsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059BBC227945B2900451731 /* FriendsInteractor.swift */; };
 		9059BBC72794893C00451731 /* MyGroupsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059BBC62794893C00451731 /* MyGroupsInteractor.swift */; };
@@ -52,6 +53,7 @@
 		903268F827949702005EE049 /* AllGroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGroupsViewController.swift; sourceTree = "<group>"; };
 		903268FA2794A65F005EE049 /* FriendsPhotosInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsPhotosInteractor.swift; sourceTree = "<group>"; };
 		90376ED527AEDE5800C64671 /* PhotoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItem.swift; sourceTree = "<group>"; };
+		9046B98628C7A7FE007F17D5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9059BBC02794255100451731 /* VKLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKLoginViewController.swift; sourceTree = "<group>"; };
 		9059BBC227945B2900451731 /* FriendsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsInteractor.swift; sourceTree = "<group>"; };
 		9059BBC62794893C00451731 /* MyGroupsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGroupsInteractor.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				90D3C8BF274E54B7005B5755 /* Assets.xcassets */,
 				90D3C8C1274E54B7005B5755 /* LaunchScreen.storyboard */,
 				90D3C8C4274E54B7005B5755 /* Info.plist */,
+				9046B98628C7A7FE007F17D5 /* GoogleService-Info.plist */,
 			);
 			path = VKClient;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90D3C8C3274E54B7005B5755 /* LaunchScreen.storyboard in Resources */,
+				9046B98728C7A7FE007F17D5 /* GoogleService-Info.plist in Resources */,
 				90D3C8C0274E54B7005B5755 /* Assets.xcassets in Resources */,
 				90D3C8BE274E54B5005B5755 /* Main.storyboard in Resources */,
 			);
@@ -493,6 +497,7 @@
 				DEVELOPMENT_TEAM = LA452SPSQ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VKClient/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VKClient;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -522,6 +527,7 @@
 				DEVELOPMENT_TEAM = LA452SPSQ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VKClient/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VKClient;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

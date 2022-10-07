@@ -13,17 +13,7 @@ class FriendsPhotosViewController: UIViewController {
     var photoCount = 0
     var swipeRight: UIViewPropertyAnimator!
     var swipeLeft: UIViewPropertyAnimator!
-
     var userId: Int?
-    
-    //MARK: - Data
-//    var photo: UIImage?
-//    var photoArray: [UIImage] = [UIImage(named: "nikita") ?? UIImage(),
-//                                 UIImage(named: "sasha") ?? UIImage(),
-//                                 UIImage(named: "mithun") ?? UIImage(),
-//                                 UIImage(named: "shaurma") ?? UIImage(),
-//                                 UIImage(named: "chuck") ?? UIImage(),
-//    ]
     var photoArray: [UIImage] = []
     
     //MARK: - Outlets
