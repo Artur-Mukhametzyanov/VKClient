@@ -23,7 +23,7 @@ class FriendsInteractor {
                                       "v": 5.131
         ]
         
-        AF.request(url, method: .get, parameters: parameters).responseJSON { rawData in
+        AF.request(url, method: .get, parameters: parameters).responseData { rawData in
             do {
                 guard let data = rawData.data else {return}
                 let response = try JSONDecoder().decode(FriendResponse.self, from: data)

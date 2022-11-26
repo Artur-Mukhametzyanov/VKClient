@@ -9,37 +9,42 @@ import UIKit
 
 class NewsViewController: UIViewController {
     
-    //MARK: - Data
-    var newsArray: [NewsStruct] = [NewsStruct(newsSourceImage: UIImage(named: "beach"), newsSourceName: "Новостная новость", newsText: "Классический текст-«рыба». Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке", newsImage: UIImage(named: "newsPhoto"))]
-
-    //MARK: - Outlets
+    let news = ["news 1", "news 2", "news 3"]
+    
     @IBOutlet weak var tableView: UITableView!
     
-    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
     }
 }
 
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
-    //MARK: - Table view delegate and data source
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return news.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newsArray.count
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NewsCell", for: indexPath) as? NewsCell else { return UITableViewCell() }
-        
-        cell.newsAvatarImage.image = newsArray[indexPath.row].newsSourceImage
-        cell.newsSourceName.text = newsArray[indexPath.row].newsSourceName
-        cell.newsTextLabel.text = newsArray[indexPath.row].newsText
-        cell.newsImage.image = newsArray[indexPath.row].newsImage
-        
-        return cell
+        switch indexPath.row {
+        case 0:
+            let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell", for: indexPath) as! HeaderCell
+            return headerCell
+        case 1:
+            let groupCell = tableView.dequeueReusableCell(withIdentifier: "GroupTextCell", for: indexPath) as! GroupTextCell
+            return groupCell
+        case 2:
+            let imageCell = tableView.dequeueReusableCell(withIdentifier: "GroupImageCell", for: indexPath) as! GroupImageCell
+            return imageCell
+        case 3:
+            let infoCell = tableView.dequeueReusableCell(withIdentifier: "AdditionalInfoCell", for: indexPath) as! AdditionalInfoCell
+            return infoCell
+        default:
+            return UITableViewCell()
+        }
     }
 }
